@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 
 function Home() {
-  const { namePokemon, setDetailsPokemon } = useContext(AppContext);
+  const { namePokemon, setHandleNamePokemon } = useContext(AppContext);
 
   function handleCLickName({target}) {
     const { value } = target;
-    setDetailsPokemon(value)
+    setHandleNamePokemon(value)
   }
 
   return (

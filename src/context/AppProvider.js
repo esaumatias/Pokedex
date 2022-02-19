@@ -4,7 +4,7 @@ import { requestNamePokemon } from '../services/FetchApi';
 
 const AppProvider = ({ children }) => {
   const [namePokemon , setNamePokemon ] = useState([]);
-  const [detailsPokemon , setDetailsPokemon ] = useState([]);
+  const [handleNamePokemon , setHandleNamePokemon ] = useState([]);
 
   useEffect(() => {
     const getNamePokemon = async () => {
@@ -18,8 +18,8 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={ {
         namePokemon,
-        detailsPokemon,
-        setDetailsPokemon,
+        handleNamePokemon,
+        setHandleNamePokemon,
       } }
     >
       {children}

@@ -1,5 +1,5 @@
 export const requestNamePokemon = async () => {
-  const URL = `https://pokeapi.co/api/v2/pokemon?limit=25&offset=200`;
+  const URL = `https://pokeapi.co/api/v2/pokemon?limit=1000&offset=200`;
   try {
     const response = await fetch(URL);
     const responseJSON = await response.json();
@@ -33,6 +33,16 @@ export const requestTypePokemon = async (type) => {
 
 export const requestDetailsPokemon = async (name) => {
   const URL = `https://pokeapi.co/api/v2/pokemon/${name}`;
+  try {
+    const response = await fetch(URL);
+    const responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const locationAreaEncounters = async (URL) => {
   try {
     const response = await fetch(URL);
     const responseJSON = await response.json();
