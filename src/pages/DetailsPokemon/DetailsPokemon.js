@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/AppContext';
 import { requestDetailsPokemon, locationAreaEncounters } from '../../services/FetchApi';
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import { ProgressBar, Spinner } from 'react-bootstrap';
 
 function DetailsPokemon() {
   const { handleNamePokemon } = useContext(AppContext);
@@ -91,7 +91,7 @@ function DetailsPokemon() {
             ) : <p>sem informações!</p>}
           </div>
         </div>
-      ) : null}
+      ) : <Spinner animation="border" />}
     </div>
   )
 }
