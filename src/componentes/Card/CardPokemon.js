@@ -56,7 +56,22 @@ function CardPokemon() {
         className="justify-content-md-center"
         >
           <Card.Header className="text-center">{detailsPokemon[0].name}</Card.Header>
-          <Card.Img style={{ width: '300px', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.front_default}`} />
+
+          <Row className="justify-content-md-center" style={{ width: '100%'}} >
+            <Col xs md="auto">
+              <Card.Img style={{ width: '300px', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.front_default}`} />
+            </Col>
+            <Col md="auto" style={{ width: '30%'}}>
+              {stats.map((value, index) => (
+                  <Row className="justify-content-md-center" key={index}>
+                    <Col key={index}>
+                      <Card.Text>{value[0]}</Card.Text>
+                      <ProgressBar animated now={value[1]} label={`${value[1]}`}/>
+                    </Col>
+                  </Row>
+                ))}
+            </Col>
+          </Row>
           <Card.Body>
             <Row className="justify-content-md-center">
               {types.map((value, index) => (
@@ -75,25 +90,11 @@ function CardPokemon() {
           </Card.Body>
 
           <Card.Body>
-            <Card.Title>Stats:</Card.Title >
-            {stats.map((value, index) => (
-                <Row className="justify-content-md-center" key={index}>
-                  <Col key={index}>
-                    <Card.Text>{value[0]}</Card.Text>
-                    <ProgressBar animated now={value[1]} label={`${value[1]}`}/>
-                  </Col>
-                </Row>
-              ))}
-          </Card.Body>
-
-          <Card.Body>
             <Card.Title>Localização:</Card.Title>
             {location.length > 0 ? (
               <Row className="justify-content-md-center" style={{ flexWrap: 'wrap', display: 'flex'}}>
                 {location.map((value, index) => (
-                <Col key={index}>
                   <Card.Text>{value.location_area.name}</Card.Text>
-                </Col>
                 ))}
               </Row>
             ) : <p>sem informações!</p>}
@@ -105,3 +106,15 @@ function CardPokemon() {
 }
 
 export default CardPokemon;
+
+{/* <Row className="justify-content-md-center">
+<Card.Img style={{ width: '300px', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.front_default}`} />
+<Row className="justify-content-md-center">
+  {stats.map((value, index) => (   
+      <Col key={index} xs md="auto">
+        <Card.Text>{value[0]}</Card.Text>
+        <ProgressBar animated now={value[1]} label={`${value[1]}`}/>
+      </Col>
+  ))}
+</Row>
+</Row> */}
