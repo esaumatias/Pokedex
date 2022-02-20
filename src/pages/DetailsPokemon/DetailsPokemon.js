@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/AppContext';
 import { requestDetailsPokemon, locationAreaEncounters } from '../../services/FetchApi';
-import { ProgressBar, Spinner } from 'react-bootstrap';
+import { ProgressBar, Spinner, Card, Container, Row, Col } from 'react-bootstrap';
 
 function DetailsPokemon() {
   const { handleNamePokemon } = useContext(AppContext);
@@ -48,39 +48,46 @@ function DetailsPokemon() {
     setStats(arrayStats);
   }, [detailsPokemon]);
 
-  console.log(stats)
+  console.log(detailsPokemon)
 
   return (
-    <div>
+    <Container style={{ height: '100vh'}}>
       {detailsPokemon.length > 0 ? (
-        <div>
-          <span>{detailsPokemon[0].name}</span>
-          <img src={detailsPokemon[0].sprites.front_default} alt={detailsPokemon[0].name} />
-          <div>
-            <p>Tipo:</p>
-            {types.map((value, index) => (
-                <p key={index}>{value}</p>
-              ))}
-          </div>
+        <Card
+        variant="Success"
+        style={{ width: '100%' }}
+        className="justify-content-md-center"
+        >
+          <Card.Header className="text-center">{detailsPokemon[0].name}</Card.Header>
+          <Card.Img style={{ width: '300px', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.front_default}`} />
+          <Card.Body>
+            <Row className="justify-content-md-center">
+              {types.map((value, index) => (
+                  <Col key={index} xs md="auto">{value}</Col>
+                ))}
+            </Row>
+          </Card.Body>
 
-          <div>
-            <p>Habilidades:</p>
-            {ability.map((value, index) => (
-                <p key={index}>{value}</p>
+          <Card.Body>
+            <Card.Title>Habilidades:</Card.Title >
+            <Row className="justify-content-md-center">
+              {ability.map((value, index) => (
+                  <Col key={index} xs md="auto">{value}</Col>
               ))}
-          </div>
+            </Row>
+          </Card.Body>
 
-          <div>
-            <p>Stats:</p>
-            <div>
-              {stats.map((value, index) => (
-                <div key={index}>
-                  <h3>{value[0]}</h3>
-                  <ProgressBar animated now={value[1]} label={`${value[1]}`}/>
-                </div>
+          <Card.Body>
+            <Card.Title>Stats:</Card.Title >
+            {stats.map((value, index) => (
+                <Row className="justify-content-md-center" key={index}>
+                  <Col key={index}>
+                    <Card.Text>{value[0]}</Card.Text>
+                    <ProgressBar animated now={value[1]} label={`${value[1]}`}/>
+                  </Col>
+                </Row>
               ))}
-            </div>
-          </div>
+          </Card.Body>
 
           <div>
             <p>Localização:</p>
@@ -90,9 +97,9 @@ function DetailsPokemon() {
               ))
             ) : <p>sem informações!</p>}
           </div>
-        </div>
-      ) : <Spinner animation="border" />}
-    </div>
+        </Card>
+      ) : <Spinner animation="border" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}/>}
+    </Container>
   )
 }
 
