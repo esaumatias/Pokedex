@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/AppContext';
 import { requestDetailsPokemon, locationAreaEncounters } from '../../services/FetchApi';
 import { ProgressBar, Spinner, Card, Container, Row, Col } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 function CardPokemon() {
   const { handleNamePokemon } = useContext(AppContext);
@@ -47,8 +48,13 @@ function CardPokemon() {
     setTypes(arrayTypes);
     setStats(arrayStats);
   }, [detailsPokemon]);
+
+  console.log(handleNamePokemon);
+
   return(
     <Container>
+      {handleNamePokemon.length <= 0 || handleNamePokemon === undefined ? <Redirect to="/" /> : null}
+
       {detailsPokemon.length > 0 ? (
         <Card
         variant="Success"
@@ -57,21 +63,25 @@ function CardPokemon() {
         >
           <Card.Header className="text-center">{detailsPokemon[0].name}</Card.Header>
 
-          <Row className="justify-content-md-center" style={{ width: '100%'}} >
-            <Col xs md="auto">
-              <Card.Img style={{ width: '300px', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.front_default}`} />
-            </Col>
-            <Col md="auto" style={{ width: '30%'}}>
-              {stats.map((value, index) => (
-                  <Row className="justify-content-md-center" key={index}>
-                    <Col key={index}>
-                      <Card.Text>{value[0]}</Card.Text>
-                      <ProgressBar animated now={value[1]} label={`${value[1]}`}/>
-                    </Col>
-                  </Row>
-                ))}
-            </Col>
-          </Row>
+          <Card.Body>
+            <Row className="justify-content-md-center" style={{ width: '100%'}} >
+              <Col xs md="auto">
+                <Card.Img style={{ width: '50%', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.front_default}`} />
+                <Card.Img style={{ width: '50%', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.back_default}`} />
+              </Col>
+              <Col md="auto" style={{ width: '100%'}}>
+                {stats.map((value, index) => (
+                    <Row className="justify-content-md-center" key={index}>
+                      <Col key={index}>
+                        <Card.Text>{value[0]}</Card.Text>
+                        <ProgressBar animated now={value[1]} label={`${value[1]}`}/>
+                      </Col>
+                    </Row>
+                  ))}
+              </Col>
+            </Row>
+          </Card.Body>
+
           <Card.Body>
             <Row className="justify-content-md-center">
               {types.map((value, index) => (
@@ -94,7 +104,7 @@ function CardPokemon() {
             {location.length > 0 ? (
               <Row className="justify-content-md-center" style={{ flexWrap: 'wrap', display: 'flex'}}>
                 {location.map((value, index) => (
-                  <Card.Text>{value.location_area.name}</Card.Text>
+                  <Card.Text key={index}>{value.location_area.name}</Card.Text>
                 ))}
               </Row>
             ) : <p>sem informações!</p>}
@@ -106,15 +116,3 @@ function CardPokemon() {
 }
 
 export default CardPokemon;
-
-{/* <Row className="justify-content-md-center">
-<Card.Img style={{ width: '300px', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.front_default}`} />
-<Row className="justify-content-md-center">
-  {stats.map((value, index) => (   
-      <Col key={index} xs md="auto">
-        <Card.Text>{value[0]}</Card.Text>
-        <ProgressBar animated now={value[1]} label={`${value[1]}`}/>
-      </Col>
-  ))}
-</Row>
-</Row> */}
