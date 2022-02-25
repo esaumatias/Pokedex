@@ -5,46 +5,45 @@ import { requestNamePokemon } from '../../services/FetchApi';
 function SearchBar() {
   const { setNamePokemon, setSum, sum } = useContext(AppContext);
   const [filter, setFilter] = useState([]);
-  const [value, setValue] = useState([]);
+  const [handleName, setHandleName] = useState([]);
 
   useEffect(() => {
     const getNamePokemon = async () => {
       const response = await requestNamePokemon();
-      if (value.length === 0) {
+      if (handleName.length === 0) {
         setNamePokemon(response);
-      } else if (value.length > 0) {
+      } else if (handleName.length > 0) {
         setFilter(response);
       }
-      if(sum < 5) {
+      if(sum < 3) {
         setSum(sum + 1);
       }
     };
     getNamePokemon();
-  }, [setNamePokemon, setSum, sum, value.length]);
+  }, [setNamePokemon, setSum, sum, handleName.length]);
 
+  function handleFilter({target}) {
+    const { value } = target;
+    setHandleName(value);
+  }
 
-function handleFilter({target}) {
-  const { value } = target;
-  setValue(value);
-  const array = [];
-  for(let i = 0; i < filter.length; i += 1) {
-    if (filter[i].name.includes(value) ) {
-      array.push(filter[i])
-      setNamePokemon(array);
-      setSum(0);
-    } 
-    if(value.length === 0) {
-      setNamePokemon(filter);
+  function handleCLick() {
+    const array = [];
+    for(let i = 0; i < filter.length; i += 1) {
+      if (filter[i].name.includes(handleName) ) {
+        array.push(filter[i])
+        setNamePokemon(array);
+        setSum(0);
+      } 
     }
   }
-}
 
-console.log(value)
+// console.log(filter)
 
   return (
     <div>
       <input type="search" onChange={handleFilter}/>
-      <button type="button">Procurar</button>
+      <button type="button" onClick={handleCLick}>Procurar</button>
     </div>
   )
 }

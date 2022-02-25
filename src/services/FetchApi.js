@@ -1,5 +1,5 @@
 export const requestNamePokemon = async () => {
-  const URL = `https://pokeapi.co/api/v2/pokemon?limit=50&offset=200`;
+  const URL = `https://pokeapi.co/api/v2/pokemon?limit=1000&offset=200`;
   try {
     const response = await fetch(URL);
     const responseJSON = await response.json();
