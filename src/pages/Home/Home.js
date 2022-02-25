@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { Spinner, Container, Button } from 'react-bootstrap';
+import SearchBar from '../../componentes/SearchBar/SearchBar';
 
 function Home() {
   const { detailsPokemon, setHandleNamePokemon } = useContext(AppContext);
@@ -13,7 +14,9 @@ function Home() {
   }
 
   return (
-    <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', height: '100vh'}}>
+    <div>
+      <SearchBar />
+      <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', height: '100vh'}}>
       {detailsPokemon
         ? detailsPokemon.map((value, index) => (
           <Link to={"/DetailsPokemon"} key={index} >
@@ -34,6 +37,7 @@ function Home() {
           ))
         : <Spinner animation="border"/>}
     </Container>
+    </div>
   );
 }
 

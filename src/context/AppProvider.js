@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import AppContext from './AppContext';
-import { requestNamePokemon, requestDetailsPokemon } from '../services/FetchApi';
+import { requestDetailsPokemon } from '../services/FetchApi';
 
 const AppProvider = ({ children }) => {
   const [namePokemon , setNamePokemon ] = useState([]);
   const [handleNamePokemon , setHandleNamePokemon ] = useState([]);
   const [detailsPokemon, setDetailsPokemon] = useState([]);
   const [sum, setSum] = useState(0);
-
-  useEffect(() => {
-    const getNamePokemon = async () => {
-      const response = await requestNamePokemon();
-      setNamePokemon(response);
-      if(sum < 50) {
-        setSum(sum + 1);
-      }
-    };
-    getNamePokemon();
-  }, [sum]);
 
   useEffect(() => {
    if(sum === 1) {
@@ -32,14 +21,19 @@ const AppProvider = ({ children }) => {
    }
   }, [namePokemon, sum]);
 
+  // console.log(namePokemon)
+
   return (
     <AppContext.Provider
       value={ {
         namePokemon,
+        setNamePokemon,
         handleNamePokemon,
         setHandleNamePokemon,
         detailsPokemon,
         setDetailsPokemon,
+        sum,
+        setSum
       } }
     >
       {children}
