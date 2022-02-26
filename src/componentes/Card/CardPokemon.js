@@ -12,7 +12,6 @@ function CardPokemon() {
   const [singleDetailsPokemon, setSingleDetails] = useState([]);
   const [ability, setAbility] = useState([]);
   const [types, setTypes] = useState([]);
-  const [location, setLocation] = useState([]);
   const [stats, setStats] = useState([]);
 
   useEffect(() => {
@@ -40,12 +39,6 @@ function CardPokemon() {
       for (let index = 0; index <= singleDetailsPokemon[0].stats.length - 1; index += 1) {
         arrayStats.push([Object.values(singleDetailsPokemon)[0].stats[index].stat.name, Object.values(singleDetailsPokemon)[0].stats[index].base_stat]);
       }
-
-      const getLocation = async () => {
-        const responseLocation = await locationAreaEncounters(singleDetailsPokemon[0].location_area_encounters);
-        setLocation(responseLocation);
-      };
-      getLocation();
     }
     setAbility(arrayAbility)
     setTypes(arrayTypes);
@@ -99,17 +92,6 @@ function CardPokemon() {
               ))}
             </Row>
           </Card.Body>
-
-          {/* <Card.Body>
-            <Card.Title>Localização:</Card.Title>
-            {location.length > 0 ? (
-              <Row className="justify-content-md-center" style={{ flexWrap: 'wrap', display: 'flex'}}>
-                {location.map((value, index) => (
-                  <Card.Text key={index}>{value.location_area.name}</Card.Text>
-                ))}
-              </Row>
-            ) : <p>sem informações!</p>}
-          </Card.Body> */}
         <Link to="/" className="d-grid gap-2">
           <Button>Voltar</Button>
         </Link>
