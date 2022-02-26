@@ -4,6 +4,8 @@ import AppContext from '../../context/AppContext';
 import { Spinner, Container, Button } from 'react-bootstrap';
 import SearchBar from '../../componentes/SearchBar/SearchBar';
 
+import './Home.css';
+
 function Home() {
   const { detailsPokemon, setHandleNamePokemon } = useContext(AppContext);
 
@@ -20,7 +22,7 @@ function Home() {
       {detailsPokemon
         ? detailsPokemon.map((value, index) => (
           <Link to={"/DetailsPokemon"} key={index} >
-            <Button onClick={handleCLickName} value={value}  style={{ margin: "15px", height: "250px"}}>
+            <Button onClick={handleCLickName} value={value}  style={{ margin: "15px", height: "250px", width: "250px", borderRadius: "40px 10px" }}>
               <h5 className="text-center" value={value}>{value.name}</h5>
               <img
                 style={{ width: "120px", margin: "auto" }}
@@ -29,9 +31,11 @@ function Home() {
                 alt={value.name}
                 value={value}
               />
-              <div>{value.types[0].type.name}</div>
-              {value.types[1] ? <div>{value.types[1].type.name}</div> : null}
-              {value.types[2] ? <div>{value.types[2].type.name}</div> : null}
+              <div className="containerType">
+                <div className={value.types[0].type.name}>{value.types[0].type.name}</div>
+                {value.types[1] ? <div className={value.types[1].type.name}>{value.types[1].type.name}</div> : null}
+                {value.types[2] ? <div className={value.types[2].type.name}>{value.types[2].type.name}</div> : null}
+              </div>
             </Button>
         </Link>
           ))

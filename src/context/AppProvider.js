@@ -21,7 +21,7 @@ const AppProvider = ({ children }) => {
    }
   }, [namePokemon, sum]);
 
-  // console.log(namePokemon)
+  console.log(namePokemon)
 
   return (
     <AppContext.Provider

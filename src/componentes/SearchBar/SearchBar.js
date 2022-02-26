@@ -2,6 +2,8 @@ import React, {useEffect, useContext, useState} from 'react';
 import AppContext from '../../context/AppContext';
 import { requestNamePokemon, requestTypePokemon } from '../../services/FetchApi';
 
+import { Navbar, Container, Form, Row, Col, Nav } from 'react-bootstrap';
+
 function SearchBar() {
   const { setNamePokemon, setSum, sum } = useContext(AppContext);
   const [filter, setFilter] = useState([]);
@@ -31,9 +33,10 @@ function SearchBar() {
   useEffect(() => {
     const getNamePokemon = async () => {
       const response = handleType !== 'Todos' ? await requestTypePokemon(handleType) : await requestNamePokemon(); 
-      if (handleName.length === 0) {
+      if (handleName.length === 0 && handleType === 'Todos') {
         setNamePokemon(response);
-      } else if (handleName.length > 0) {
+        setFilter(response);
+      } else {
         setFilter(response);
       }
       if(sum < 10) {
@@ -52,16 +55,10 @@ function SearchBar() {
     const array = [];
     for(let i = 0; i < filter.length; i += 1) {
      if (handleType !== 'Todos') {
-      if (handleName.length > 0 ) {
-        if (filter[i].pokemon.name.includes(handleName) ) {
-          array.push(filter[i].pokemon)
-          setNamePokemon(array);
-          setSum(0);
-        } else {
-          array.push(filter[i].pokemon)
-          setNamePokemon(array);
-          setSum(0);
-        }
+      if (filter[i].pokemon.name.includes(handleName) ) {
+        array.push(filter[i].pokemon)
+        setNamePokemon(array);
+        setSum(0);
       }
      } else {
       if (filter[i].name.includes(handleName) ) {
@@ -81,15 +78,33 @@ function SearchBar() {
 // console.log(filter)
 
   return (
-    <div>
-      <input type="search" onChange={handleFilter}/>
-      <select onChange={typeHandler}>
-        {type.map((value, index) => (
-          <option value={value} key={index} name="type">{value}</option>
-        ))}
-      </select>
-      <button type="button" onClick={handleCLick}>Procurar</button>
-    </div>
+    <Navbar bg="danger" variant="danger" className="justify-content-md-center">
+      <Nav className="justify-content-center" activeKey="/home">
+        <Container fluid>
+          <Form >
+            <Form.Group>
+              <Row>
+                <Col xs={'auto'} style={{ padding: '7px'}}>
+                  <Form.Control type="search" onChange={handleFilter} aria-label="Default select example" size="sm" placeholder="Digite o nome do Pokemon"/>
+                </Col>
+                
+                <Col style={{ padding: '7px'}}>
+                  <Form.Select aria-label="Default select example" onClick={typeHandler}  size="sm">
+                    {type.map((value, index) => (
+                      <option value={value} key={index} name="type">{value}</option>
+                    ))}
+                  </Form.Select >
+                </Col>
+
+                <Col style={{ padding: '7px'}}>
+                  <Form.Control type="button" value="Procurar" onClick={handleCLick} size="sm"/>
+                </Col>
+              </Row>
+            </Form.Group>
+        </Form>
+        </Container>
+      </Nav>
+    </Navbar>
   )
 }
 
