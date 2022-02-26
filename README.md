@@ -1,6 +1,6 @@
 ## Projeto Pokedex
 
-_[Acesse aqui](https://pokedex-kckpl2bam-esaumatias.vercel.app/)_
+_[Acesse aqui](https://esaumatias.github.io/projetos/lessons-learned/)_
 
 ### Contexto
 
@@ -16,4 +16,4 @@ Neste projeto é feita uma requisição à API pokeapi e é renderizada uma tabe
 2. Instalar as dependência necessárias para o projeto: ```npm install```
 3. Iniciar o projeto: ```npm start```
 
-![alt text](./src//images/Captura de tela de 2022-02-26 15-29-51.png);
+![alt text](./src/images/image.png);
