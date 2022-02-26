@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/AppContext';
-import { requestDetailsPokemon, locationAreaEncounters } from '../../services/FetchApi';
+import { requestDetailsPokemon } from '../../services/FetchApi';
 import { Link } from 'react-router-dom';
 import { ProgressBar, Spinner, Card, Container, Row, Col, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
