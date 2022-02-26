@@ -1,0 +1,15 @@
+@media (max-width: 600px) {
+  .containerCard .containerStats {
+    width: 100%;
+  }
+}
+
+@media (min-width: 601px) {
+  .containerCard .containerStats {
+    width: 30%;
+  }
+}
+
+.containerCard {
+  text-transform: uppercase;
+}

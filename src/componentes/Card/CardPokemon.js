@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/AppContext';
 import { requestDetailsPokemon, locationAreaEncounters } from '../../services/FetchApi';
-import { ProgressBar, Spinner, Card, Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { ProgressBar, Spinner, Card, Container, Row, Col, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+
+import './CardPokemon.css';
 
 function CardPokemon() {
   const { handleNamePokemon } = useContext(AppContext);
@@ -52,24 +55,22 @@ function CardPokemon() {
   console.log(handleNamePokemon);
 
   return(
-    <Container>
+    <Container className="containerCard">
       {handleNamePokemon.length <= 0 || handleNamePokemon === undefined ? <Redirect to="/" /> : null}
 
       {singleDetailsPokemon.length > 0 ? (
         <Card
-        variant="Success"
         style={{ width: '100%' }}
-        className="justify-content-md-center"
+        className="justify-content-md-center containerSingleCard"
         >
-          <Card.Header className="text-center">{singleDetailsPokemon[0].name}</Card.Header>
+          <Card.Header className="text-center" style={{ backgroundColor: 'red', color: 'white', fontSize: '20px'}}>{singleDetailsPokemon[0].name}</Card.Header>
 
           <Card.Body>
             <Row className="justify-content-md-center" style={{ width: '100%'}} >
               <Col xs md="auto">
-                <Card.Img style={{ width: '50%', margin: 'auto' }} variant="top" src={`${singleDetailsPokemon[0].sprites.front_default}`} />
-                <Card.Img style={{ width: '50%', margin: 'auto' }} variant="top" src={`${singleDetailsPokemon[0].sprites.back_default}`} />
+                <Card.Img style={{ maxWidth: '100%', height: '250px' ,margin: 'auto' }} variant="top" src={`${singleDetailsPokemon[0].sprites.front_default}`} />
               </Col>
-              <Col md="auto" style={{ width: '100%'}}>
+              <Col md="auto" className="containerStats">
                 {stats.map((value, index) => (
                     <Row className="justify-content-md-center" key={index}>
                       <Col key={index}>
@@ -83,14 +84,14 @@ function CardPokemon() {
           </Card.Body>
 
           <Card.Body>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center" style={{ textAlign: 'center' }}>
               {types.map((value, index) => (
-                  <Col key={index} xs md="auto">{value}</Col>
+                  <Col key={index} xs md="auto" className={value} style={{ color: 'white', width: '30%', margin: '5px'}}>{value}</Col>
                 ))}
             </Row>
           </Card.Body>
 
-          <Card.Body>
+          <Card.Body style={{ textAlign: 'center' }}>
             <Card.Title>Habilidades:</Card.Title >
             <Row className="justify-content-md-center">
               {ability.map((value, index) => (
@@ -99,7 +100,7 @@ function CardPokemon() {
             </Row>
           </Card.Body>
 
-          <Card.Body>
+          {/* <Card.Body>
             <Card.Title>Localização:</Card.Title>
             {location.length > 0 ? (
               <Row className="justify-content-md-center" style={{ flexWrap: 'wrap', display: 'flex'}}>
@@ -108,7 +109,10 @@ function CardPokemon() {
                 ))}
               </Row>
             ) : <p>sem informações!</p>}
-          </Card.Body>
+          </Card.Body> */}
+        <Link to="/" className="d-grid gap-2">
+          <Button>Voltar</Button>
+        </Link>
         </Card>
       ) : <Spinner animation="border" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}/>}
     </Container>
