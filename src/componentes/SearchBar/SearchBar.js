@@ -83,22 +83,28 @@ function SearchBar() {
         <Container fluid>
           <Form >
             <Form.Group>
-              <Row>
-                <Col xs={'auto'} style={{ padding: '7px'}}>
-                  <Form.Control type="search" onChange={handleFilter} aria-label="Default select example" size="sm" placeholder="Digite o nome do Pokemon"/>
+              <Row style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
+                <Col style={{ padding: '7px'}}>
+                  <Form.Text style={{ color: 'white', fontSize: '30px'}}>Pokedex</Form.Text>
                 </Col>
                 
-                <Col style={{ padding: '7px'}}>
-                  <Form.Select aria-label="Default select example" onClick={typeHandler}  size="sm">
-                    {type.map((value, index) => (
-                      <option value={value} key={index} name="type">{value}</option>
-                    ))}
-                  </Form.Select >
-                </Col>
+                <div style={{ display: 'flex', flexWrap: 'wrap'}}>
+                  <Col xs={'auto'} style={{ padding: '7px'}}>
+                    <Form.Control type="search" onChange={handleFilter} aria-label="Default select example" size="sm" placeholder="Digite o nome do Pokemon"/>
+                  </Col>
+                  
+                  <Col style={{ padding: '7px'}}>
+                    <Form.Select aria-label="Default select example" onClick={typeHandler}  size="sm">
+                      {type.map((value, index) => (
+                        <option value={value} key={index} name="type">{value}</option>
+                      ))}
+                    </Form.Select >
+                  </Col>
 
-                <Col style={{ padding: '7px'}}>
-                  <Form.Control type="button" value="Procurar" onClick={handleCLick} size="sm"/>
-                </Col>
+                  <Col style={{ padding: '7px'}}>
+                    <Form.Control type="button" value="Procurar" onClick={handleCLick} size="sm"/>
+                  </Col>
+                </div>
               </Row>
             </Form.Group>
         </Form>

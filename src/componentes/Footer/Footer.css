@@ -1,0 +1,18 @@
+.containerFooter {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(221, 54, 71);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.containerFooter a {
+  text-transform: none;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}

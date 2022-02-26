@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { Spinner, Container, Button } from 'react-bootstrap';
 import SearchBar from '../../componentes/SearchBar/SearchBar';
+import Footer from '../../componentes/Footer/Footer';
 
 import './Home.css';
 
@@ -16,9 +17,9 @@ function Home() {
   }
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <SearchBar />
-      <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', height: '100vh'}}>
+      <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap'}}>
       {detailsPokemon
         ? detailsPokemon.map((value, index) => (
           <Link to={"/DetailsPokemon"} key={index} >
@@ -41,7 +42,8 @@ function Home() {
           ))
         : <Spinner animation="border"/>}
     </Container>
-    </div>
+    <Footer />
+  </div>
   );
 }
 

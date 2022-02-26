@@ -11,7 +11,7 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
    if(sum === 1) {
     let newArray = [];
-    namePokemon.slice(0, 49).map((value, index) => (
+    namePokemon.slice(0, 24).map((value, index) => (
       <div key={index}>
         {requestDetailsPokemon(value.name).then((response) => {
           newArray.push(response);
