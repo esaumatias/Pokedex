@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 function CardPokemon() {
   const { handleNamePokemon } = useContext(AppContext);
-  const [detailsPokemon, setDetailsPokemon] = useState([]);
+  const [singleDetailsPokemon, setSingleDetails] = useState([]);
   const [ability, setAbility] = useState([]);
   const [types, setTypes] = useState([]);
   const [location, setLocation] = useState([]);
@@ -15,7 +15,7 @@ function CardPokemon() {
   useEffect(() => {
     const getPokemon = async () => {
     const response = await requestDetailsPokemon(handleNamePokemon);
-    setDetailsPokemon([response]);
+    setSingleDetails([response]);
     };
     getPokemon();
   }, [handleNamePokemon]);
@@ -25,21 +25,21 @@ function CardPokemon() {
     const arrayTypes = [];
     const arrayStats = [];
 
-    if (detailsPokemon.length > 0) {
-      for (let index = 0; index <= detailsPokemon[0].abilities.length - 1; index += 1) {
-        arrayAbility.push(Object.values(detailsPokemon[0])[0][index].ability.name)
+    if (singleDetailsPokemon.length > 0) {
+      for (let index = 0; index <= singleDetailsPokemon[0].abilities.length - 1; index += 1) {
+        arrayAbility.push(Object.values(singleDetailsPokemon[0])[0][index].ability.name)
       }
 
-      for (let index = 0; index <= detailsPokemon[0].types.length - 1; index += 1) {
-        arrayTypes.push(Object.values(detailsPokemon)[0].types[index].type.name)
+      for (let index = 0; index <= singleDetailsPokemon[0].types.length - 1; index += 1) {
+        arrayTypes.push(Object.values(singleDetailsPokemon)[0].types[index].type.name)
       }
 
-      for (let index = 0; index <= detailsPokemon[0].stats.length - 1; index += 1) {
-        arrayStats.push([Object.values(detailsPokemon)[0].stats[index].stat.name, Object.values(detailsPokemon)[0].stats[index].base_stat]);
+      for (let index = 0; index <= singleDetailsPokemon[0].stats.length - 1; index += 1) {
+        arrayStats.push([Object.values(singleDetailsPokemon)[0].stats[index].stat.name, Object.values(singleDetailsPokemon)[0].stats[index].base_stat]);
       }
 
       const getLocation = async () => {
-        const responseLocation = await locationAreaEncounters(detailsPokemon[0].location_area_encounters);
+        const responseLocation = await locationAreaEncounters(singleDetailsPokemon[0].location_area_encounters);
         setLocation(responseLocation);
       };
       getLocation();
@@ -47,7 +47,7 @@ function CardPokemon() {
     setAbility(arrayAbility)
     setTypes(arrayTypes);
     setStats(arrayStats);
-  }, [detailsPokemon]);
+  }, [singleDetailsPokemon]);
 
   console.log(handleNamePokemon);
 
@@ -55,19 +55,19 @@ function CardPokemon() {
     <Container>
       {handleNamePokemon.length <= 0 || handleNamePokemon === undefined ? <Redirect to="/" /> : null}
 
-      {detailsPokemon.length > 0 ? (
+      {singleDetailsPokemon.length > 0 ? (
         <Card
         variant="Success"
         style={{ width: '100%' }}
         className="justify-content-md-center"
         >
-          <Card.Header className="text-center">{detailsPokemon[0].name}</Card.Header>
+          <Card.Header className="text-center">{singleDetailsPokemon[0].name}</Card.Header>
 
           <Card.Body>
             <Row className="justify-content-md-center" style={{ width: '100%'}} >
               <Col xs md="auto">
-                <Card.Img style={{ width: '50%', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.front_default}`} />
-                <Card.Img style={{ width: '50%', margin: 'auto' }} variant="top" src={`${detailsPokemon[0].sprites.back_default}`} />
+                <Card.Img style={{ width: '50%', margin: 'auto' }} variant="top" src={`${singleDetailsPokemon[0].sprites.front_default}`} />
+                <Card.Img style={{ width: '50%', margin: 'auto' }} variant="top" src={`${singleDetailsPokemon[0].sprites.back_default}`} />
               </Col>
               <Col md="auto" style={{ width: '100%'}}>
                 {stats.map((value, index) => (

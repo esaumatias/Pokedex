@@ -25,7 +25,7 @@ export const requestTypePokemon = async (type) => {
   try {
     const response = await fetch(URL);
     const responseJSON = await response.json();
-    return responseJSON.results;
+    return responseJSON.pokemon;
   } catch (error) {
     console.log(error);
   }
