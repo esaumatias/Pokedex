@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const [handleNamePokemon , setHandleNamePokemon ] = useState([]);
   const [detailsPokemon, setDetailsPokemon] = useState([]);
   const [sum, setSum] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
    if(sum === 1) {
@@ -19,6 +20,7 @@ const AppProvider = ({ children }) => {
       </div>
     ))
    }
+   setLoading(true);
   }, [namePokemon, sum]);
 
   console.log(namePokemon)
@@ -33,7 +35,9 @@ const AppProvider = ({ children }) => {
         detailsPokemon,
         setDetailsPokemon,
         sum,
-        setSum
+        setSum,
+        loading,
+        setLoading
       } }
     >
       {children}

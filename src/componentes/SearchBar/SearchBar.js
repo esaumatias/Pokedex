@@ -46,22 +46,22 @@ function SearchBar() {
     getNamePokemon();
   }, [handleName.length, handleType, setNamePokemon, setSum, sum]);
 
-  function handleFilter({target}) {
-    const { value } = target;
-    setHandleName(value);
-  }
+  // function handleFilter({target}) {
+  //   const { value } = target;
+  //   setHandleName(value);
+  // }
 
   function handleCLick() {
     const array = [];
     for(let i = 0; i < filter.length; i += 1) {
      if (handleType !== 'Todos') {
-      if (filter[i].pokemon.name.includes(handleName) ) {
+      if (filter[i].pokemon.name.includes(handleName.toLowerCase()) ) {
         array.push(filter[i].pokemon)
         setNamePokemon(array);
         setSum(0);
       }
      } else {
-      if (filter[i].name.includes(handleName) ) {
+      if (filter[i].name.includes(handleName.toLowerCase()) ) {
         array.push(filter[i])
         setNamePokemon(array);
         setSum(0);
@@ -70,10 +70,10 @@ function SearchBar() {
   }
 }
 
-  function typeHandler({target}) {
-    const { value } = target;
-    setHandleType(value);
-  }
+  // function typeHandler({target}) {
+  //   const { value } = target;
+  //   setHandleType(value);
+  // }
 
 // console.log(filter)
 
@@ -90,11 +90,11 @@ function SearchBar() {
                 
                 <div style={{ display: 'flex', flexWrap: 'wrap'}}>
                   <Col xs={'auto'} style={{ padding: '7px'}}>
-                    <Form.Control type="search" onChange={handleFilter} aria-label="Default select example" size="sm" placeholder="Digite o nome do Pokemon"/>
+                    <Form.Control type="search" onChange={({target})=>setHandleName(target.value)} aria-label="Default select example" size="sm" placeholder="Digite o nome do Pokemon"/>
                   </Col>
                   
                   <Col style={{ padding: '7px'}}>
-                    <Form.Select aria-label="Default select example" onClick={typeHandler}  size="sm">
+                    <Form.Select aria-label="Default select example" onChange={({target})=>setHandleType(target.value)}  size="sm">
                       {type.map((value, index) => (
                         <option value={value} key={index} name="type">{value}</option>
                       ))}

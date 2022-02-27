@@ -61,7 +61,7 @@ function CardPokemon() {
           <Card.Body>
             <Row className="justify-content-md-center" style={{ width: '100%'}} >
               <Col xs md="auto">
-                <Card.Img style={{ maxWidth: '100%', height: '250px' ,margin: 'auto' }} variant="top" src={`${singleDetailsPokemon[0].sprites.front_default}`} />
+                <Card.Img style={{ maxWidth: '100%', height: '250px' ,margin: 'auto' }} variant="top" src={`${singleDetailsPokemon[0].sprites.other.home.front_default}`} />
               </Col>
               <Col md="auto" className="containerStats">
                 {stats.map((value, index) => (
