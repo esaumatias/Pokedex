@@ -7,7 +7,7 @@ import { Navbar, Container, Form, Row, Col, Nav } from 'react-bootstrap';
 function SearchBar() {
   const { setNamePokemon, setSum, sum } = useContext(AppContext);
   const [filter, setFilter] = useState([]);
-  const [handleName, setHandleName] = useState([]);
+  const [handleName, setHandleName] = useState('');
   const [handleType, setHandleType] = useState('Todos');
   const type = [
     'Todos',
